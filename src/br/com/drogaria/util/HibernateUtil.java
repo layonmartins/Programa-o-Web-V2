@@ -1,38 +1,33 @@
 package br.com.drogaria.util;
 
-import javax.imageio.spi.ServiceRegistry;
-
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-//import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+	private static SessionFactory sessionFactory = buildSessionFactory();
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            // Create the SessionFactory from hibernate.cfg.xml
-        	Configuration configuration = new Configuration();
-        	configuration.configure();
-        	
-        	ServiceRegistry serviceRegistry = (ServiceRegistry) new StandardServiceRegistryBuilder()
-        			.applySettings(configuration.getProperties()).build();
-        	SessionFactory sessionFactory = configuration.buildSessionFactory((org.hibernate.service.ServiceRegistry) serviceRegistry);
-        	
-        	return sessionFactory;
-            
-        }
-        catch (Throwable ex) {
-            // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
+	private static SessionFactory buildSessionFactory() {
+		try {
+			StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+					.configure("hibernate.cfg.xml").build();
+			Metadata metaData = (Metadata) new MetadataSources(standardRegistry).getMetadataBuilder().build();
+			sessionFactory = metaData.getSessionFactoryBuilder().build();
 
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+			return sessionFactory;
+
+		} catch (Throwable ex) {
+			// Make sure you log the exception, as it might be swallowed
+			System.err.println("Initial SessionFactory creation failed." + ex);
+			throw new ExceptionInInitializerError(ex);
+		}
+	}
+
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
 }
