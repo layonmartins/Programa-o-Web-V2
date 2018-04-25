@@ -28,7 +28,7 @@ public class Venda {
 	@Column(name = "ven_horario", nullable = false)
 	private Date horario;
 
-	@Column(name = "ven_total", precision = 7, scale = 2, nullable = false)
+	@Column(name = "ven_valor_total", precision = 7, scale = 2, nullable = false)
 	private BigDecimal valor;
 
 	@ManyToOne(fetch = FetchType.EAGER)
