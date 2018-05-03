@@ -25,7 +25,6 @@ public class FabricanteDAO {
 		} finally {
 			sessao.close();
 		}
-
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
@@ -42,7 +41,7 @@ public class FabricanteDAO {
 		}
 		return fabricantes;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	public Fabricante buscarPorCodigo(Long codigo) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
@@ -57,6 +56,39 @@ public class FabricanteDAO {
 			sessao.close();
 		}
 		return fabricante;
+	}
+
+	public void excluir(Fabricante fabricante) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.delete(fabricante);
+			transacao.commit();
+		} catch (Exception e) {
+			if (transacao != null)
+				transacao.rollback();
+			throw e;
+		} finally {
+			sessao.close();
+		}
+	}
+
+	public void excluir(Long codigo) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			Fabricante fabricante = buscarPorCodigo(codigo);
+			sessao.delete(fabricante);
+			transacao.commit();
+		} catch (Exception e) {
+			if (transacao != null)
+				transacao.rollback();
+			throw e;
+		} finally {
+			sessao.close();
+		}
 	}
 
 }
