@@ -12,52 +12,69 @@ public class FabricanteDAOTest {
 
 	@Test
 	@Ignore
-	public void salvar(){
+	public void salvar() {
 		Fabricante f1 = new Fabricante();
 		f1.setDescricao("descricao 1");
-		
+
 		Fabricante f2 = new Fabricante();
 		f2.setDescricao("descricao 2");
-		
+
 		FabricanteDAO dao = new FabricanteDAO();
 		dao.salvar(f1);
 		dao.salvar(f2);
 	}
-	
+
 	@Test
 	@Ignore
-	public void listar(){
+	public void listar() {
 		FabricanteDAO dao = new FabricanteDAO();
 		List<Fabricante> fabricantes = dao.listar();
-		for(Fabricante fabricante : fabricantes){
+		for (Fabricante fabricante : fabricantes) {
 			System.out.println(fabricante);
 		}
 	}
-	
+
 	@Test
 	@Ignore
-	public void buscarPorCodigo(){
+	public void buscarPorCodigo() {
 		FabricanteDAO dao = new FabricanteDAO();
 		Fabricante f1 = dao.buscarPorCodigo(1L);
 		Fabricante f2 = dao.buscarPorCodigo(7L);
-		
+
 		System.out.println(f1);
 		System.out.println(f2);
 	}
-	
+
 	@Test
 	@Ignore
-	public void excluir(){
+	public void excluir() {
 		FabricanteDAO dao = new FabricanteDAO();
 		Fabricante fabricante = dao.buscarPorCodigo(1L);
-		if(fabricante != null)
-		dao.excluir(fabricante);
+		if (fabricante != null)
+			dao.excluir(fabricante);
+
+		// Fabricante fabricante = new Fabricante();
+		// fabricante.setCodigo(3l);
+		// fabricante.setDescricao("descricao 3");
+		// FabricanteDAO dao = new FabricanteDAO();
+		// dao.excluir(fabricante);
+
 	}
-	
+
 	@Test
-	//@Ignore
-	public void excluirPorCodigo(){
+	@Ignore
+	public void excluirPorCodigo() {
 		FabricanteDAO dao = new FabricanteDAO();
 		dao.excluir(4L);
+	}
+
+	@Test
+	@Ignore
+	public void editar() {
+		Fabricante fabricante = new Fabricante();
+		fabricante.setCodigo(5L);
+		fabricante.setDescricao("Descrição Y");
+		FabricanteDAO dao = new FabricanteDAO();
+		dao.editar(fabricante);
 	}
 }

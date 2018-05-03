@@ -90,5 +90,29 @@ public class FabricanteDAO {
 			sessao.close();
 		}
 	}
+	
+	public void editar(Fabricante fabricante) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+		try {
+			transacao = sessao.beginTransaction();
+			
+			//# Ter certeza que todos os dados do fabricante (transiente) estão preenchidos
+			// Fabricante fabricanteEditar =
+			// buscarPorCodigo(fabricante.getCodigo());
+			// fabricanteEditar.setDescricao(fabricante.getDescricao());
+			// sessao.update(fabricanteEditar);
+			
+			sessao.update(fabricante);
+			
+			transacao.commit();
+		} catch (Exception e) {
+			if (transacao != null)
+				transacao.rollback();
+			throw e;
+		} finally {
+			sessao.close();
+		}
+	}
 
 }
