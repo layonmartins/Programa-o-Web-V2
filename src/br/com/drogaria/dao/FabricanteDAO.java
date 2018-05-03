@@ -42,5 +42,21 @@ public class FabricanteDAO {
 		}
 		return fabricantes;
 	}
+	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public Fabricante buscarPorCodigo(Long codigo) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Fabricante fabricante = null;
+		try {
+			Query<Fabricante> consulta = sessao.getNamedQuery("Fabricante.buscarPorCodigo");
+			consulta.setLong("codigo", codigo);
+			fabricante = (Fabricante) consulta.uniqueResult();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			sessao.close();
+		}
+		return fabricante;
+	}
 
 }

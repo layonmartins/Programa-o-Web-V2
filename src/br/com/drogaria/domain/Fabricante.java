@@ -11,7 +11,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_fabricantes")
-@NamedQueries({ @NamedQuery(name = "Fabricante.listar", query = "SELECT fabricante FROM Fabricante fabricante") })
+@NamedQueries({ @NamedQuery(name = "Fabricante.listar", query = "SELECT fabricante FROM Fabricante fabricante"),
+		@NamedQuery(name = "Fabricante.buscarPorCodigo", query = "SELECT fabricante FROM Fabricante fabricante WHERE fabricante.codigo = :codigo") })
 public class Fabricante {
 
 	@Id
@@ -42,7 +43,5 @@ public class Fabricante {
 	public String toString() {
 		return "Fabricante [codigo=" + codigo + ", descricao=" + descricao + "]";
 	}
-	
-	
 
 }

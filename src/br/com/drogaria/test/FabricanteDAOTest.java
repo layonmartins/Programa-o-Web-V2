@@ -25,11 +25,22 @@ public class FabricanteDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void listar(){
 		FabricanteDAO dao = new FabricanteDAO();
 		List<Fabricante> fabricantes = dao.listar();
 		for(Fabricante fabricante : fabricantes){
 			System.out.println(fabricante);
 		}
+	}
+	
+	@Test
+	public void buscarPorCodigo(){
+		FabricanteDAO dao = new FabricanteDAO();
+		Fabricante f1 = dao.buscarPorCodigo(1L);
+		Fabricante f2 = dao.buscarPorCodigo(7L);
+		
+		System.out.println(f1);
+		System.out.println(f2);
 	}
 }
