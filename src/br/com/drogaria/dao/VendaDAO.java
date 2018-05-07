@@ -6,19 +6,19 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.drogaria.domain.Produto;
+import br.com.drogaria.domain.Venda;
 import br.com.drogaria.util.HibernateUtil;
 
 @SuppressWarnings("deprecation")
-public class ProdutoDAO {
+public class VendaDAO {
 
-	public void salvar(Produto produto) {
+	public void salvar(Venda venda) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
 
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.save(produto);
+			sessao.save(venda);
 			transacao.commit();
 		} catch (RuntimeException ex) {
 			if (transacao != null) {
@@ -31,45 +31,44 @@ public class ProdutoDAO {
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public List<Produto> listar() {
+	public List<Venda> listar() {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		List<Produto> produtos = null;
+		List<Venda> vendas = null;
 
 		try {
-			Query<Produto> consulta = sessao.getNamedQuery("Produto.listar");
-			produtos = consulta.list();
+			Query<Venda> consulta = sessao.getNamedQuery("Venda.listar");
+			vendas = consulta.list();
 		} catch (RuntimeException ex) {
 			throw ex;
 		} finally {
 			sessao.close();
 		}
-		return produtos;
+		return vendas;
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public Produto buscarPorCodigo(Long codigo) {
+	public Venda buscarPorCodigo(Long codigo) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Produto produto = null;
+		Venda venda = null;
 
 		try {
-			Query<Produto> consulta = sessao.getNamedQuery("Produto.buscarPorCodigo");
+			Query<Venda> consulta = sessao.getNamedQuery("Venda.buscarPorCodigo");
 			consulta.setLong("codigo",  codigo);
-			produto = (Produto) consulta.uniqueResult();
+			venda = (Venda) consulta.uniqueResult();
 		} catch (RuntimeException ex) {
 			throw ex;
 		} finally {
 			sessao.close();
 		}
-		return produto;
+		return venda;
 	}
 	
-	public void excluir(Produto produto){
+	public void excluir(Venda venda){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
-
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.delete(produto);
+			sessao.delete(venda);
 			transacao.commit();
 		} catch (RuntimeException ex) {
 			if (transacao != null) {
@@ -81,13 +80,13 @@ public class ProdutoDAO {
 		}
 	}
 	
-	public void editar(Produto produto) {
+	public void editar(Venda venda) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao = null;
 
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.update(produto);
+			sessao.update(venda);
 			transacao.commit();
 		} catch (RuntimeException ex) {
 			if (transacao != null) {
@@ -98,4 +97,5 @@ public class ProdutoDAO {
 			sessao.close();
 		}
 	}
+	
 }
