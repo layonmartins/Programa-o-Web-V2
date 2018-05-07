@@ -41,9 +41,17 @@ public class produtoDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void listar(){
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		List<Produto> produtos = produtoDAO.listar();
 		System.out.println(produtos);
+	}
+	
+	@Test
+	public void excluir(){
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscarPorCodigo(3L);
+		produtoDAO.excluir(produto);
 	}
 }

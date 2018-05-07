@@ -61,4 +61,22 @@ public class ProdutoDAO {
 		}
 		return produto;
 	}
+	
+	public void excluir(Produto produto){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.delete(produto);
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			if (transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+	}
 }
