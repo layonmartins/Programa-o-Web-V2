@@ -79,4 +79,22 @@ public class ProdutoDAO {
 			sessao.close();
 		}
 	}
+	
+	public void editar(Produto produto) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao = null;
+
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.update(produto);
+			transacao.commit();
+		} catch (RuntimeException ex) {
+			if (transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		} finally {
+			sessao.close();
+		}
+	}
 }
