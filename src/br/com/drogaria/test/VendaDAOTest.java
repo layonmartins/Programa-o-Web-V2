@@ -55,7 +55,7 @@ public class VendaDAOTest {
 	}
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void editar() {
 		VendaDAO vendaDAO = new VendaDAO();
 		Venda venda = vendaDAO.buscarPorCodigo(1L);
