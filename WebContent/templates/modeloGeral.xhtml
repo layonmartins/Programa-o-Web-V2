@@ -21,7 +21,21 @@
 
 		<p:layoutUnit position="west" size="250" resizable="false"
 			closable="false" collapsed="false">
-			<ui:insert name="menu" />
+			<h:form>
+				<p:panelMenu>
+					<p:submenu label="Arquivo">
+						<p:menuitem value="Principal" outcome="/pages/principal.xhtml" />
+						<p:menuitem value="Sair" />
+					</p:submenu>
+					<p:submenu label="Cadastros">
+					<p:menuitem value="Fabricante" outcome="/pages/fabricantePesquisa.xhtml" />
+						<p:menuitem value="Produtos" />
+						<p:menuitem value="Funcionário" />
+					</p:submenu>
+					<p:submenu label="Vendas">
+					</p:submenu>
+				</p:panelMenu>
+			</h:form>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center" resizable="false" closable="false"
