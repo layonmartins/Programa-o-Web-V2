@@ -10,6 +10,8 @@
 	<title>Drogaria</title>
 </h:head>
 <h:body>
+	<p:growl id="msgGlobal" sticky="true"/>
+	
 	<p:layout fullPage="true">
 		<p:layoutUnit header="Sistema para Gerenciamento de Drogarias"
 			position="north" resizable="false" closable="false" collapsed="false">
@@ -30,7 +32,7 @@
 					<p:submenu label="Cadastros">
 					<p:menuitem value="Fabricante" outcome="/pages/fabricantePesquisa.xhtml" />
 						<p:menuitem value="Produtos" />
-						<p:menuitem value="Funcionário" />
+						<p:menuitem value="Funcionário" outcome="/pages/funcionarioPesquisa.xhtml" />
 					</p:submenu>
 					<p:submenu label="Vendas">
 					</p:submenu>
