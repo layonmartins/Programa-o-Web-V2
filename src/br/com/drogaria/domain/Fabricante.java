@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_fabricantes")
@@ -20,6 +23,8 @@ public class Fabricante {
 	@Column(name = "fab_codigo")
 	private Long codigo;
 
+	@NotEmpty(message = "O campo descrição é obrigatório")
+	@Size(min = 5, max = 50, message = "Tamanho inválido para o campo descrição (5 - 50)")
 	@Column(name = "fab_descricao", length = 50, nullable = false)
 	private String descricao;
 
